@@ -34,6 +34,7 @@ namespace HackerRankProblems
             Console.WriteLine(OrangeCount);
         }
 
+        // Counting kangaroo jmps
         static string kangaroo(int x1, int v1, int x2, int v2)
         {
             int count = 0;
@@ -57,6 +58,18 @@ namespace HackerRankProblems
 
         }
 
+        //Grading Student [In Progress]
+        static int[] gradingStudents(int[] grades)
+        {
+            int DivideByFive = 0;
+           for (int i = 0; i < grades.Length; i++)
+            {
+                if (grades[i] <)
+               DivideByFive = grades[i] / 5;
+            }
+
+        }
+
 
         static void Main(string[] args)
         {
@@ -65,7 +78,8 @@ namespace HackerRankProblems
             //int[] Orange = new int[] { 3, -2, -4 };
             //countApplesAndOranges(7, 10, 4, 12, Apple, Orange);
 
-            Console.WriteLine(kangaroo(0, 3, 4, 2));
+            //Kangaroo Input
+            //Console.WriteLine(kangaroo(0, 3, 4, 2));
             //Console.WriteLine(kangaroo(2, 1, 1, 2));
 
         }
