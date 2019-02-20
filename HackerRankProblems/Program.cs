@@ -62,11 +62,10 @@ namespace HackerRankProblems
         //Grading Student [Complete]
         static int[] gradingStudents(int[] grades)
         {
-            int DivideByFive = 0;
             int FailingGrade = 38;
             for (int i = 0; i < grades.Length; i++)
             {
-                 DivideByFive = (int)Math.Round(grades[i] / 5.0) * 5;
+                 var DivideByFive = (int)Math.Round(grades[i] / 5.0) * 5;
                 var Difference = DivideByFive - grades[i];
                  if (Difference < 3 && Difference > 0 && grades[i] >= FailingGrade)
                     grades[i] = DivideByFive;
@@ -77,22 +76,27 @@ namespace HackerRankProblems
 
         static int[] climbingLeaderboard(int[] scores, int[] alice)
         {
-            int Counter = 0;
+            int Counter = scores.Distinct().Count();
             int[] LeaderOutput = new int[alice.Length];
 
             for (int j = 0; j < alice.Length; j++)
             {
-                for (int i = 0; i < scores.Length; i++)
+               
+                for (int i = scores.Length - 1; i >= 0; i--)
                 {
-                    if (scores[i] < alice[j])
+                    Console.WriteLine($"Score: {scores[i]} Alice: {alice[j]}");
+                    if (alice[j] > scores[i])
                     {
-                        Counter++;
+                        Counter--;
+                    }
+                    else if (alice[j] == scores[i])
+                    {
+
                     }
                 }
-
                 LeaderOutput[j] = Counter;
-                Counter = 0;
-                Console.WriteLine(LeaderOutput[j]);
+                Counter = scores.Count();
+                Console.WriteLine($"Output: {LeaderOutput[j]}");
             }
 
             return LeaderOutput;
@@ -105,7 +109,7 @@ namespace HackerRankProblems
             //int[] Orange = new int[] { 3, -2, -4 };
             //countApplesAndOranges(7, 10, 4, 12, Apple, Orange);
 
-            //Kangaroo Input
+            //Kangaroo Input 
             //Console.WriteLine(kangaroo(0, 3, 4, 2));
             //Console.WriteLine(kangaroo(2, 1, 1, 2));
 
@@ -114,8 +118,10 @@ namespace HackerRankProblems
             //Console.WriteLine(gradingStudents(grades));
 
             //Score Board Input
-            int[] scores = new int[] { 100, 100, 50, 40, 40, 20, 10 };
-            int[] alice = new int[] { 5, 25, 50, 120 };
+            //int[] scores = new int[] { 100, 100, 50, 40, 40, 20, 10 };
+            //int[] alice = new int[] { 5, 25, 50, 120 };
+            int[] scores = new int[] { 100, 90, 90, 80, 75, 60 };
+            int[] alice = new int[] { 50, 65, 77, 90, 102 };
             climbingLeaderboard(scores, alice);
         }
     }
