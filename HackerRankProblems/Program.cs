@@ -76,30 +76,58 @@ namespace HackerRankProblems
 
         static int[] climbingLeaderboard(int[] scores, int[] alice)
         {
-            int Counter = scores.Distinct().Count();
-            int[] LeaderOutput = new int[alice.Length];
+            var counter = scores.Distinct().Count();
+            var leaderOutput = new int[alice.Length];
 
-            for (int j = 0; j < alice.Length; j++)
+            for (var j = 0; j < alice.Length; j++)
             {
-               
-                for (int i = scores.Length - 1; i >= 0; i--)
+
+                for (var i = scores.Distinct().Count(); i >= 0; i--)
                 {
-                    Console.WriteLine($"Score: {scores[i]} Alice: {alice[j]}");
                     if (alice[j] > scores[i])
                     {
-                        Counter--;
+                        counter--;
                     }
-                    else if (alice[j] == scores[i])
-                    {
 
+                    if (alice[j] >= scores.Max())
+                    {
+                        counter = 1;
+                        break;
                     }
+
                 }
-                LeaderOutput[j] = Counter;
-                Counter = scores.Count();
-                Console.WriteLine($"Output: {LeaderOutput[j]}");
+                leaderOutput[j] = counter;
+                counter = scores.Distinct().Count();
+                Console.WriteLine($"Alice Score Placement: {leaderOutput[j]}");
             }
 
-            return LeaderOutput;
+            //var aliceCount = 0;
+            //var scoresCount = 0;
+            //while (loopCounter < alice.Length)
+            //{
+            //    while (scoresCount <= scores.Distinct().Count())
+            //    {
+            //        if (alice[aliceCount] < scores[scoresCount])
+            //        {
+            //            counter++;
+            //        }
+
+            //        if (alice[aliceCount] >= scores.Max())
+            //        {
+            //            counter++;
+            //            break;
+            //        }
+            //        scoresCount++;
+            //    }
+            //    leaderOutput[aliceCount] = counter;
+            //    Console.WriteLine($"Output: {leaderOutput[aliceCount]}");
+            //    counter = 0;
+            //    aliceCount++;
+            //    loopCounter++;
+            //    scoresCount = 0;
+            //}
+
+            return leaderOutput;
 
         }
         static void Main(string[] args)
