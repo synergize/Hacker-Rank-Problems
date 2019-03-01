@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading;
 
@@ -82,38 +83,37 @@ namespace HackerRankProblems
 
             for (var j = 0; j < alice.Length; j++)
             {
-                for (var i = scores.Length - 1; i >= 0; i--)
+                for (var i = scores.Length - 1; 
+                    i >= 0; i--)
                 {
                     if (alice[j] < scores[i])
                     {
                         break;
                     }
+
                     if (alice[j] > scores[i])
                     {
                         counter--;
+                        if (i > 0)
+                        {
+                            if (scores[i] == scores[i - 1])
+                            {
+                                counter++;
+                            }
+                        }
                     }
 
                     if (alice[j] == scores[i])
                     {
                         if (i > 0)
                         {
-                            if (alice[j] != scores[i - 1])
+                            if (alice[j] != scores[i + 1])
                             {
                                 counter--;
                             }
                         }
-
-                        if (i < scores.Length - 1)
-                        {
-                            if (alice[j] == scores[i + 1])
-                            {
-                                break;
-                            }
-                        }
-
                     }
-
-                    if (alice[j] > scores.Max())
+                    if (alice[j] >= scores.Max())
                     {
                         counter = 1;
                         break;
@@ -124,7 +124,6 @@ namespace HackerRankProblems
                 }
                 leaderOutput[j] = counter;
                 counter = scores.Distinct().Count() + 1;
-                //Console.WriteLine($"Alice Score Placement: {leaderOutput[j]}. Input: ");
             }
 
             for (int i = 0; i < checkScores.Length; i++)
@@ -150,34 +149,6 @@ namespace HackerRankProblems
                     Console.WriteLine($"{i}: Alice Score Placement: {leaderOutput[i]}. Counter Amount: {checkScores[i]} NOT CORRECT: Should be {checkAnswers[i]}");
                 }
             }
-
-
-
-            //var aliceCount = 0;
-            //var scoresCount = 0;
-            //while (loopCounter < alice.Length)
-            //{
-            //    while (scoresCount <= scores.Distinct().Count())
-            //    {
-            //        if (alice[aliceCount] < scores[scoresCount])
-            //        {
-            //            counter++;
-            //        }
-
-            //        if (alice[aliceCount] >= scores.Max())
-            //        {
-            //            counter++;
-            //            break;
-            //        }
-            //        scoresCount++;
-            //    }
-            //    leaderOutput[aliceCount] = counter;
-            //    Console.WriteLine($"Output: {leaderOutput[aliceCount]}");
-            //    counter = 0;
-            //    aliceCount++;
-            //    loopCounter++;
-            //    scoresCount = 0;
-            //}
 
             return leaderOutput;
 
